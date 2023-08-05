@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require('cors')
 const router = require("./routers/index")
+const bodyParser = require("body-parser")
 
 
 dotenv.config();
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(cors())  
 app.use(router)
 
+app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.send('Backend server is running!');
 });
