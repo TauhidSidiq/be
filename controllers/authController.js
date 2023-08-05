@@ -4,9 +4,11 @@ const bcrypt = require("bcrypt")
 // register user controller
 const register = async (req, res) => {
   try {
+    const {  name, email, password } = req.body
+
     const emailUser = await User.findOne({
       where: {
-        email: req.body.email,
+        email: email,
       },
     })
 
@@ -15,10 +17,11 @@ const register = async (req, res) => {
     }
 
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(req.body.password, salt);
+    const hash = bcrypt.hashSync(password, salt);
     console.log(req.body)
     const newUser = await User.create(
-      {...req.body, 
+      {name, 
+        email,
         password: hash
       })
     res.status(201).json({
