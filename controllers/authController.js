@@ -6,15 +6,15 @@ const register = async (req, res) => {
   try {
     const {  name, email, password } = req.body
 
-    const emailUser = await User.findOne({
-      where: {
-        email: email,
-      },
-    })
+    // const emailUser = await User.findOne({
+    //   where: {
+    //     email: email,
+    //   },
+    // })
 
-    if (emailUser) {
-      return res.status(400).json({ status: "failed", message: "Email is already exist, please use another one", })
-    }
+    // if (emailUser) {
+    //   return res.status(400).json({ status: "failed", message: "Email is already exist, please use another one", })
+    // }
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
